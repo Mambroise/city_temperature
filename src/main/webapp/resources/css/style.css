@@ -8,17 +8,18 @@
 
 body{
 	background-color: var(--black-color);
+	color: var(--grey-color);
 }
 
 header, footer{
 	width: 100%;
 	height:100px;
 	background-color: var(--white-color);
+	color: var(--black-color);
 }
 
 header .headerBox{
-	width:90%;
-	margin: auto;
+	width:100%;
 	background-color: var(--white-color);
 	height: 100%;
 	display: flex;
@@ -29,7 +30,9 @@ header .headerBox{
 .container{
 	display: flex;
 	justify-content: center;
-	height:80%;
+	min-height:80vh;
+	padding-top:20%;
+	color: var(--grey-color);
 }
 
 .mainWindow{
