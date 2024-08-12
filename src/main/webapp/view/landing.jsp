@@ -1,7 +1,10 @@
 
 <main class="container">
 	<div class="mainWindow">
-		<label>Donnez le nom d'une ville :</label>
-		<input type="text" placeholder="ville" id="cityName">
+		<form method="post" action="landing">
+			<label>Donnez le nom d'une ville :</label>
+			<input type="text" placeholder="ville" id="cityName">
+			<button type="submit">Chercher</button>
+		</form>
 	</div>
 </main>
