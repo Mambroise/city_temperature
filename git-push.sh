@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Demande un message de commit à l'utilisateur
-read -p "Quel est le nom de la branche : " commit_branch
+# Récupère le nom de la branche actuelle
+commit_branch=$(git symbolic-ref --short HEAD)
 
 # Demande un message de commit à l'utilisateur
 read -p "Entrez un message de commit : " commit_message
@@ -13,5 +13,5 @@ git add -A
 git commit -m "$commit_message"
 
 # Pousse les modifications vers le dépôt distant
-git push origin $commit_branch
+git push origin "$commit_branch"
 
