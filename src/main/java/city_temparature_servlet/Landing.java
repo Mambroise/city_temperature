@@ -35,11 +35,12 @@ public class Landing extends HttpServlet {
         // Exemple de coordonnées fixes pour Paris
         String lat = "48.8566";
         String lon = "2.3522";
-
+        System.out.println("in the do postttttttttttttttttttt");
         // Crée l'URL pour l'API
         String apiUrl = String.format("https://api.openweathermap.org/data/2.5/weather?lat=%s&lon=%s&appid=%s&units=metric", lat, lon, API_KEY);
 
         try {
+        	System.out.println("in the do try 1111111111111111111111111111111111");
             URL url = new URL(apiUrl);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             connection.setRequestMethod("GET");
@@ -54,6 +55,7 @@ public class Landing extends HttpServlet {
                     content.append(inputLine);
                 }
                 in.close();
+                System.out.println("in the do try 2222222222222222222222222222222");
 
                 // Passer la réponse JSON à la JSP
                 request.setAttribute("weatherData", content.toString());
@@ -67,6 +69,7 @@ public class Landing extends HttpServlet {
             }
         } catch (Exception e) {
             e.printStackTrace();
+            System.out.println("in the catchhh"+e);
             // Écrire le message d'erreur dans la requête
             request.setAttribute("errorMessage", "Error: " + e.getMessage());
             // Utiliser un forward pour la JSP avec message d'erreur
