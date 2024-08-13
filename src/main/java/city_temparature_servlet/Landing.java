@@ -18,7 +18,7 @@ import com.google.gson.JsonParser;
 
 import bean.Weather;
 
-@WebServlet("/landing")
+@WebServlet("/")
 public class Landing extends HttpServlet {
     private static final long serialVersionUID = 1L;
 

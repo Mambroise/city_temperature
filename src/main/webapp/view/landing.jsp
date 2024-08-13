@@ -2,7 +2,7 @@
 <main class="container">
 	<h2 class="text-center">Choisissez une ville</h2>
 	<div class="mainWindow">
-		<form method="post" action="/city_temparature/landing">
+		<form method="post" action="/city_temparature/">
 			<input type="text" name="cityName" placeholder="ville" id="cityName">
 			<button type="submit">Chercher</button>
 		</form>
