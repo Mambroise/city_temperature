@@ -16,6 +16,8 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import bean.Weather;
+
 @WebServlet("/landing")
 public class Landing extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -100,10 +102,24 @@ public class Landing extends HttpServlet {
         				content.append(inputLine);
         			}
         			in.close();
-        			System.out.println("call response =====" +content.toString());
+        			System.out.println(content.toString());
+        			JsonObject jsonObject = JsonParser.parseString(content.toString()).getAsJsonObject();
+
+        			String cityname = jsonObject.get("name").getAsString();
+        			Double latitude = jsonObject.getAsJsonObject("coord").get("lat").getAsDouble();
+        			Double longitude = jsonObject.getAsJsonObject("coord").get("lon").getAsDouble();
+        			String weather = jsonObject.getAsJsonArray("weather").get(0).getAsJsonObject().get("main").getAsString();
+        			String weatherDetails = jsonObject.getAsJsonArray("weather").get(0).getAsJsonObject().get("description").getAsString();
+        			Double temps = jsonObject.getAsJsonObject("main").get("temp").getAsDouble();
+        			Double feltTemp = jsonObject.getAsJsonObject("main").get("feels_like").getAsDouble();
+        			Double wind = jsonObject.getAsJsonObject("wind").get("speed").getAsDouble();
+        			
+        			Weather cityWeather = new Weather(cityname,latitude,longitude,weather,weatherDetails,temps,feltTemp,wind);
         			
         			// Passer la réponse JSON à la JSP
-        			request.setAttribute("weatherData", content.toString());
+        			request.setAttribute("weatherData", cityWeather);
+        			// Passer la réponse JSON à la JSP
+        			request.setAttribute("search", city);
         			// Utiliser un forward pour la JSP
         			request.getRequestDispatcher("/view/landing.jsp").forward(request, response);
         		} else {

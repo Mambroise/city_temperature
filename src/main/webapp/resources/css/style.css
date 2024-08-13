@@ -2,7 +2,7 @@
 
 :root{
 	--white-color: whitesmoke;
-	--black-color: #1c1c1c;
+	--black-color: rgb(74, 74, 74);
 	--grey-color: #c0c0c0;
 }
 
@@ -29,15 +29,19 @@ header .headerBox{
 
 .container{
 	display: flex;
-	justify-content: center;
+	flex-direction: column;
 	min-height:80vh;
-	padding-top:20%;
+	padding-top:10%;
 	color: var(--grey-color);
+}
+
+text-center{
+	text-align: center;
 }
 
 .mainWindow{
 	width:40%;
-	height:40%;
+	height:100px;
 	background-color: var(--black-color);
 	border: 1px solid black;
 	border-radius: 5px;
