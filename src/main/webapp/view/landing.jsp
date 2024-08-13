@@ -7,4 +7,9 @@
 			<button type="submit">Chercher</button>
 		</form>
 	</div>
+	<div class="">
+		<c:if test="${not empty weatherData}">
+            <p>${weatherData.coord.lat}</p>
+		</c:if>
+	</div>
 </main>
