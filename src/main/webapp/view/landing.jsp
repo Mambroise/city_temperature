@@ -1,6 +1,6 @@
 
 <main class="container">
-	<h2 class="text-center">Choisissez une ville</h2>
+	<h2 class="">Choisissez une ville</h2>
 	<div class="mainWindow">
 		<form method="post" action="/city_temparature/">
 			<input type="text" name="cityName" placeholder="ville" id="cityName">
@@ -8,13 +8,13 @@
 		</form>
 	</div>
 	<br/>
-	<div class="text-center">
+	<div class="data-countainer">
 		<c:if test="${not empty search}">
-			<strong>Votre recherche: ${search}</strong>
+			<strong>Votre recherche: <p class="font-size-medium">${search}</p> </strong>
 		</c:if>
 		<br/>
 		<c:if test="${not empty weatherData}">
-			<p>Ville: ${weatherData.cityname}</p>
+			<p>Point central des données: ${weatherData.cityname}</p>
             <p>Temps: ${weatherData.weather}</p>
             <p>Détails: ${weatherData.weatherDetails}</p>
             <p>Températures: ${weatherData.temps} deg C°</p>

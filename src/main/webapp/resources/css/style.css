@@ -28,15 +28,23 @@ header .headerBox{
 
 
 .container{
-	display: flex;
-	flex-direction: column;
+	width:90%;
+	margin:auto;
 	min-height:80vh;
 	padding-top:10%;
 	color: var(--grey-color);
 }
 
-text-center{
+.text-center{
 	text-align: center;
+}
+
+.data-countainer{
+	width:30%;
+	margin:auto;
+}
+.font-size-medium{
+	font-size:2rem;
 }
 
 .mainWindow{
