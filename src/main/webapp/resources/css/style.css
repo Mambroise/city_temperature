@@ -4,6 +4,8 @@
 	--white-color: whitesmoke;
 	--black-color: rgb(74, 74, 74);
 	--grey-color: #c0c0c0;
+	--green-color: green;
+	--light-green-color: #d5ffd5;
 }
 
 body{
@@ -54,3 +56,14 @@ header .headerBox{
 	border: 1px solid black;
 	border-radius: 5px;
 }
+
+.errorMessage{
+	padding: 15px;
+	border: 1px solid var(--green-color);
+	background-color: var(--light-green-color);
+	border-radius: 10px;
+}
+.errorMessage p{
+	color: var(--green-color);
+}
+	

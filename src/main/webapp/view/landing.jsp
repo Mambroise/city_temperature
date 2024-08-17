@@ -1,5 +1,10 @@
 
 <main class="container">
+	<c:if test="${not empty errorMessage}">
+	<div class='errorMessage'>
+		<p>${errorMessage}</p>
+	</div>
+	</c:if>
 	<h2 class="">Choisissez une ville</h2>
 	<div class="mainWindow">
 		<form method="post" action="/city_temparature/">
@@ -10,7 +15,7 @@
 	<br/>
 	<div class="data-countainer">
 		<c:if test="${not empty search}">
-			<strong>Votre recherche: <p class="font-size-medium">${search}</p> </strong>
+			<strong>Votre recherche: </strong><p class="font-size-medium">${search}</p>
 		</c:if>
 		<br/>
 		<c:if test="${not empty weatherData}">
