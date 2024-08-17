@@ -75,12 +75,16 @@ public class Landing extends HttpServlet {
 			    lat = jsonObject.get("lat").getAsString();
 			    lon = jsonObject.get("lon").getAsString();
 			} else {
-				System.out.println("respondecode pas ok"+ResponseCode);
+				request.setAttribute("errorMessage", "Failed to get aksed location.");
 			}
         	
         } catch (Exception e){
-        	System.out.println("erreur de connection");
-        	
+        	e.printStackTrace();
+    		// Catch the error message
+//    		request.setAttribute("errorMessage", "Error: " + e.getMessage());
+    		request.setAttribute("errorMessage", "Sorry, we failed to get aksed location. Please check the spelling and try again");
+    		
+    		request.getRequestDispatcher("/view/landing.jsp").forward(request, response);
         }
         
         // Crée l'URL pour l'API
@@ -123,17 +127,17 @@ public class Landing extends HttpServlet {
         			// Utiliser un forward pour la JSP
         			request.getRequestDispatcher("/view/landing.jsp").forward(request, response);
         		} else {
-        			// Écrire le message d'erreur dans la requête
+
         			request.setAttribute("errorMessage", "Failed to get weather data.");
         			// Utiliser un forward pour la JSP avec message d'erreur
         			request.getRequestDispatcher("/view/landing.jsp").forward(request, response);
         		}
         	} catch (Exception e) {
         		e.printStackTrace();
-        		System.out.println("in the catchhh"+e);
-        		// Écrire le message d'erreur dans la requête
-        		request.setAttribute("errorMessage", "Error: " + e.getMessage());
-        		// Utiliser un forward pour la JSP avec message d'erreur
+        		// Catch the error message
+//        		request.setAttribute("errorMessage", "Error: " + e.getMessage());
+        		request.setAttribute("errorMessage", "Sorry we failed to get weather data. Please try again");
+        		
         		request.getRequestDispatcher("/view/landing.jsp").forward(request, response);
         	}
         }
