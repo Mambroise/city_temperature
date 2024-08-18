@@ -1,5 +1,6 @@
 package city_temparature_servlet;
 
+import java.awt.Window.Type;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -16,7 +17,9 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-@WebServlet("/landing")
+import bean.Weather;
+
+@WebServlet("/")
 public class Landing extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -38,6 +41,13 @@ public class Landing extends HttpServlet {
     	
     	//get the city lat and long form a geo_API
         String city = request.getParameter("cityName");
+        
+        // Check if the city is null or empty
+        if (city == null || city.trim().isEmpty()) {
+            request.setAttribute("errorMessage", "Please type a location.");
+            request.getRequestDispatcher("/view/landing.jsp").forward(request, response);
+            return; // Exit the method to avoid further processing
+        }
         
         String geoApiUrl = String.format("http://api.openweathermap.org/geo/1.0/direct?q=%s&limit=1&appid=%s", city, API_KEY);
         
@@ -73,12 +83,16 @@ public class Landing extends HttpServlet {
 			    lat = jsonObject.get("lat").getAsString();
 			    lon = jsonObject.get("lon").getAsString();
 			} else {
-				System.out.println("respondecode pas ok"+ResponseCode);
+				request.setAttribute("errorMessage", "Failed to get aksed location.");
 			}
         	
         } catch (Exception e){
-        	System.out.println("erreur de connection");
-        	
+        	e.printStackTrace();
+    		// Catch the error message
+//    		request.setAttribute("errorMessage", "Error: " + e.getMessage());
+    		request.setAttribute("errorMessage", "Sorry, we failed to get aksed location. Please check the spelling and try again");
+    		
+    		request.getRequestDispatcher("/view/landing.jsp").forward(request, response);
         }
         
         // Crée l'URL pour l'API
@@ -100,24 +114,38 @@ public class Landing extends HttpServlet {
         				content.append(inputLine);
         			}
         			in.close();
-        			System.out.println("call response =====" +content.toString());
+        			System.out.println(content.toString());
+        			JsonObject jsonObject = JsonParser.parseString(content.toString()).getAsJsonObject();
+
+        			String cityname = jsonObject.get("name").getAsString();
+        			Double latitude = jsonObject.getAsJsonObject("coord").get("lat").getAsDouble();
+        			Double longitude = jsonObject.getAsJsonObject("coord").get("lon").getAsDouble();
+        			String weather = jsonObject.getAsJsonArray("weather").get(0).getAsJsonObject().get("main").getAsString();
+        			String weatherDetails = jsonObject.getAsJsonArray("weather").get(0).getAsJsonObject().get("description").getAsString();
+        			Double temps = jsonObject.getAsJsonObject("main").get("temp").getAsDouble();
+        			Double feltTemp = jsonObject.getAsJsonObject("main").get("feels_like").getAsDouble();
+        			Double wind = jsonObject.getAsJsonObject("wind").get("speed").getAsDouble();
+        			
+        			Weather cityWeather = new Weather(cityname,latitude,longitude,weather,weatherDetails,temps,feltTemp,wind);
         			
         			// Passer la réponse JSON à la JSP
-        			request.setAttribute("weatherData", content.toString());
+        			request.setAttribute("weatherData", cityWeather);
+        			// Passer la réponse JSON à la JSP
+        			request.setAttribute("search", city);
         			// Utiliser un forward pour la JSP
         			request.getRequestDispatcher("/view/landing.jsp").forward(request, response);
         		} else {
-        			// Écrire le message d'erreur dans la requête
+
         			request.setAttribute("errorMessage", "Failed to get weather data.");
         			// Utiliser un forward pour la JSP avec message d'erreur
         			request.getRequestDispatcher("/view/landing.jsp").forward(request, response);
         		}
         	} catch (Exception e) {
         		e.printStackTrace();
-        		System.out.println("in the catchhh"+e);
-        		// Écrire le message d'erreur dans la requête
-        		request.setAttribute("errorMessage", "Error: " + e.getMessage());
-        		// Utiliser un forward pour la JSP avec message d'erreur
+        		// Catch the error message
+//        		request.setAttribute("errorMessage", "Error: " + e.getMessage());
+        		request.setAttribute("errorMessage", "Sorry we failed to get weather data. Please try again");
+        		
         		request.getRequestDispatcher("/view/landing.jsp").forward(request, response);
         	}
         }
