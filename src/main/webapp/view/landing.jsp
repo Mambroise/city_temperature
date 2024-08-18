@@ -9,7 +9,7 @@
 	<div class='d-flex-center'>
 		<div class="mainWindow">
 			<form method="post" action="/city_temparature/">
-				<input type="text" name="cityName" placeholder="location" id="cityName">
+				<input type="text" name="cityName" placeholder="location" id="cityName" required>
 				<button type="submit">Search</button>
 			</form>
 			<br/>
