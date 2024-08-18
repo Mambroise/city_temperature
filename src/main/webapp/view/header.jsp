@@ -9,7 +9,5 @@
 </head>
 <body>
 	<header>
-		<div class="headerBox">
-			<h1>City-Weather</h1>
-		</div>
+			<h1 class="text-center title">City-Weather</h1>
 	</header>

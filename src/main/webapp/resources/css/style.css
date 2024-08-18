@@ -3,9 +3,9 @@
 :root{
 	--white-color: whitesmoke;
 	--black-color: rgb(74, 74, 74);
-	--grey-color: #c0c0c0;
-	--green-color: green;
-	--light-green-color: #d5ffd5;
+	--grey-color: rgb(227, 227, 227);
+	--orange-color: orange;
+	--light-orange-color: #fff3cd;
 }
 
 .d-flex-center{
@@ -17,43 +17,39 @@
 	font-size:2rem;
 }
 
+h2{
+	font-size:3rem;
+}
+
 body{
-	background-color: var(--black-color);
-	color: var(--grey-color);
-}
-
-header, footer{
-	width: 100%;
-	height:100px;
-	background-color: var(--white-color);
-	color: var(--black-color);
-}
-
-.headerBox{
-	width:100%;
-	background-color: var(--white-color);
-	height: 100%;
-	display: flex;
-	justify-content: center;
-}
-
-
-.container{
-	width:90%;
-	margin:auto;
-	min-height:80vh;
-	padding-top:5%;
-	color: var(--grey-color);
+	background-image: url("../images/beach_wallpaper.jpg");
+	background-repeat:no-repeat;
+	background-size:cover;
+	color: var(--white-color);
 }
 
 .text-center{
 	text-align: center;
 }
 
-/* .data-countainer{
-	width:30%;
+footer{
+	width: 100%;
+	height:100px;
+	background-color: var(--white-color);
+	color: var(--black-color);
+}
+
+.title{
+	font-size:6rem;
+	margin-top:0;
+}
+
+.container{
+	width:90%;
 	margin:auto;
-} */
+	min-height:80vh;
+	padding-top:4%;
+}
 
 .mainWindow{
 	width:30%;
@@ -63,15 +59,17 @@ header, footer{
 	color:var(--black-color);
 	border: 1px solid black;
 	border-radius: 10px;
+	opacity:0.9;
 }
 
 .errorMessage{
 	padding: 15px;
-	border: 1px solid var(--green-color);
-	background-color: var(--light-green-color);
+	border: 1px solid var(--orange-color);
+	background-color: var(--light-orange-color);
 	border-radius: 10px;
+	opacity:0.9;
 }
 .errorMessage p{
-	color: var(--green-color);
+	color: var(--orange-color);
 }
 	
