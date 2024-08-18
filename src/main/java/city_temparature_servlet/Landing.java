@@ -1,5 +1,6 @@
 package city_temparature_servlet;
 
+import java.awt.Window.Type;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -40,6 +41,13 @@ public class Landing extends HttpServlet {
     	
     	//get the city lat and long form a geo_API
         String city = request.getParameter("cityName");
+        
+        // Check if the city is null or empty
+        if (city == null || city.trim().isEmpty()) {
+            request.setAttribute("errorMessage", "Please type a location.");
+            request.getRequestDispatcher("/view/landing.jsp").forward(request, response);
+            return; // Exit the method to avoid further processing
+        }
         
         String geoApiUrl = String.format("http://api.openweathermap.org/geo/1.0/direct?q=%s&limit=1&appid=%s", city, API_KEY);
         
